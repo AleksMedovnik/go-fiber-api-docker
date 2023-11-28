@@ -6,6 +6,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// @Summary Get Products
+// @Tags Product
+// @Description Get Product List
+// @ID get-product-list
+// @Accept json
+// @Produce json
+// @Router /products/ [get]
 func (h handler) GetProducts(c *fiber.Ctx) error {
 	var products []models.Product
 

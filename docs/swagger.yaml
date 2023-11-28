@@ -1,0 +1,116 @@
+basePath: /
+definitions:
+  products.AddProductRequestBody:
+    properties:
+      name:
+        type: string
+      price:
+        type: integer
+      stock:
+        type: integer
+    type: object
+  products.UpdateProductRequestBody:
+    properties:
+      name:
+        type: string
+      price:
+        type: integer
+      stock:
+        type: integer
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: This is an example of a REST API
+  title: Go-fiber-api-docker
+  version: "1.0"
+paths:
+  /products/:
+    get:
+      consumes:
+      - application/json
+      description: Get Product List
+      operationId: get-product-list
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Products
+      tags:
+      - Product
+    post:
+      consumes:
+      - application/json
+      description: Create Product
+      operationId: add-product
+      parameters:
+      - description: data of the product
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/products.AddProductRequestBody'
+      produces:
+      - application/json
+      responses: {}
+      summary: Add Product
+      tags:
+      - Product
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Product
+      operationId: delete-product
+      parameters:
+      - description: product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete Product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: Get Product
+      operationId: get-product
+      parameters:
+      - description: product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Product
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: Put Product
+      operationId: put-product
+      parameters:
+      - description: product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: data for product updates
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/products.UpdateProductRequestBody'
+      produces:
+      - application/json
+      responses: {}
+      summary: Put Product
+      tags:
+      - Product
+swagger: "2.0"

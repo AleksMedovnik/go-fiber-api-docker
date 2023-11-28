@@ -12,11 +12,19 @@ type UpdateProductRequestBody struct {
 	Price int32  `json:"price"`
 }
 
+// @Summary Put Product
+// @Tags Product
+// @Description Put Product
+// @ID put-product
+// @Accept json
+// @Produce json
+// @Param id path string true "product ID"
+// @Param input body UpdateProductRequestBody true "data for product updates"
+// @Router /products/{id} [put]
 func (h handler) UpdateProduct(c *fiber.Ctx) error {
 	id := c.Params("id")
 	body := UpdateProductRequestBody{}
 
-	// getting request's body
 	if err := c.BodyParser(&body); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
@@ -31,7 +39,6 @@ func (h handler) UpdateProduct(c *fiber.Ctx) error {
 	product.Stock = body.Stock
 	product.Price = body.Price
 
-	// save product
 	h.DB.Save(&product)
 
 	return c.Status(fiber.StatusOK).JSON(&product)

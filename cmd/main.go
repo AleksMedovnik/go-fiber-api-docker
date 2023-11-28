@@ -7,8 +7,14 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
+// @title Go-fiber-api-docker
+// @version 1.0
+// @description This is an example of a REST API 
+// @host localhost:3000
+// @BasePath /
 func main() {
 	c, err := config.LoadConfig()
 
@@ -18,6 +24,7 @@ func main() {
 
 	h := db.Init(&c)
 	app := fiber.New()
+	app.Use(cors.New())
 
 	products.RegisterRoutes(app, h)
 

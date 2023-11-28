@@ -2,7 +2,10 @@ package products
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/swagger"
 	"gorm.io/gorm"
+
+	_ "go-fiber-api-docker/docs"
 )
 
 type handler struct {
@@ -13,6 +16,8 @@ func RegisterRoutes(app *fiber.App, db *gorm.DB) {
 	h := &handler{
 		DB: db,
 	}
+
+	app.Get("/swagger/*", swagger.HandlerDefault)
 
 	routes := app.Group("/products")
 	routes.Post("/", h.AddProduct)
